@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public float turnSpeed = 20f;
 
-    
     Animator m_Animator;
     Rigidbody m_Rigidbody;
     AudioSource m_AudioSource;
@@ -37,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         bool isWalking = hasHorizontalInput || hasVerticalInput;
 
         m_Animator.SetBool("IsWalking", isWalking);
+
         if(isWalking)
         {
             if(!m_AudioSource.isPlaying)
