@@ -18,6 +18,8 @@ public class Gun : MonoBehaviour
     public float fireDelay;
     public float reloadDelay;
 
+
+    [SerializeField] private Animator playerAnim;
     private bool isFire = true;
     private bool isReload = false;
 
@@ -53,6 +55,8 @@ public class Gun : MonoBehaviour
         isFire = false;
         currentAmmo--;
 
+        playerAnim.SetTrigger("IsFire");
+
         Vector3 firePos = new Vector3(ammoPos.position.x, ammoPos.position.y, ammoPos.position.z);
    
         // firePos에 ammo를 생성
@@ -76,6 +80,7 @@ public class Gun : MonoBehaviour
     {
         isReload = true;
 
+        playerAnim.SetTrigger("IsReloading");
         // max와 currnent의 차이(temp)를 구해서
         // has에서 그 차이(temp)만큼을 빼준다.
         // 장전 되었기 때문에, '현재 장전된 개수'를 '최대 장전 개수'와 맞추어준다.
