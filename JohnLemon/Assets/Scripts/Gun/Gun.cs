@@ -60,7 +60,7 @@ public class Gun : MonoBehaviour
 
         // ammo가 앞으로 나아가도록 힘을 준다.
         Rigidbody ammoRigid = ammo.GetComponent<Rigidbody>();
-        ammoRigid.AddRelativeForce(-ammoPos.transform.forward * ammoPower, ForceMode.Impulse); // 캐릭터가 앞을 보는 방향으로 가도록
+        ammoRigid.AddRelativeForce(ammoPos.transform.forward * ammoPower, ForceMode.Impulse); // 캐릭터가 앞을 보는 방향으로 가도록
 
         // 발사 쿨타임을 설정
         yield return new WaitForSeconds(fireDelay);

@@ -6,7 +6,11 @@ using UnityEngine.UIElements;
 
 public class Ammo : MonoBehaviour
 {
-
     public float ammoDamage;
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Destroy(this);
+    }
 }
