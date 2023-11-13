@@ -74,12 +74,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6361509601569221773}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &2858540204554561875 stripped
-CapsuleCollider:
-  m_CorrespondingSourceObject: {fileID: 9215222923082630622, guid: b28cf08aceb495242ada35a9c1f66e33,
+--- !u!114 &2992344904817218258 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8200613541037850207, guid: b28cf08aceb495242ada35a9c1f66e33,
     type: 3}
   m_PrefabInstance: {fileID: 6361509601569221773}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f443c4f92a347a4692d1ba4a97de184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7360749613147031834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -259,12 +265,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fdaecb83cdbcb240ac209466c003c9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objBlockTime: 2
+  moveBlockTime: 5
+  curTime: -1
   navMeshAgent: {fileID: 3322969552901473763}
   waypoints: []
-  m_colliders:
-  - {fileID: 6488407406915025221}
-  - {fileID: 2858540204554561875}
+  observer: {fileID: 2992344904817218258}
 --- !u!82 &1543078367502586927
 AudioSource:
   m_ObjectHideFlags: 0

@@ -242,7 +242,6 @@ Transform:
   m_Children:
   - {fileID: 4517459885062255148}
   - {fileID: 6662896219517907639}
-  - {fileID: 1390706951884077643}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 2.844, y: -99.591, z: -223.635}
 --- !u!114 &7240914646976141511
@@ -262,40 +261,8 @@ MonoBehaviour:
   currentAmmo: 0
   ammoPrefab: {fileID: 249179456453421932, guid: da17597c0db0f6d439861095d928d766,
     type: 3}
-  ammoPos: {fileID: 1390706951884077643}
+  ammoPos: {fileID: 0}
   ammoPower: 3
   fireDelay: 0.5
   reloadDelay: 0
   playerAnim: {fileID: 0}
---- !u!1 &8137082479678667215
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1390706951884077643}
-  m_Layer: 0
-  m_Name: Ammo Pos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1390706951884077643
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8137082479678667215}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.000000029802315, y: 0.000000044703473, z: -0.000000014901158,
-    w: 1}
-  m_LocalPosition: {x: 0.0037, y: 0.1138, z: -0.093}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2040872431663316090}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

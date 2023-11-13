@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class WaypointPatrol : MonoBehaviour
 {
-    public float objBlockTime;
+    public float moveBlockTime; // block 디버프 시간
+    public float curTime =-1f; // 타이머작동까지 시간을 누적하는 변수
     public NavMeshAgent navMeshAgent;
     public Transform[] waypoints;
     int m_CurrentWaypointIndex;
 
-    [SerializeField] Collider[] m_colliders;
+    [SerializeField] private Observer observer;
 
     private bool isMoveBlock = false;
 
@@ -22,7 +24,8 @@ public class WaypointPatrol : MonoBehaviour
 
     void Update()
     {
-        if(isMoveBlock == false)
+        UpdateTimer();
+        if (isMoveBlock == false)
         {
             // 목적지까지 남은 거리(remain)가 목적지(stopDistance)보다 작을 경우
             if (navMeshAgent.remainingDistance < navMeshAgent.stoppingDistance)
@@ -39,32 +42,71 @@ public class WaypointPatrol : MonoBehaviour
     {
         if(collision.gameObject.tag=="Ammo")
         {
-            StartCoroutine("MoveBlock");
+            if (isMoveBlock == false)
+            {
+                Debug.Log("ismoveblock==false");
+                ActiveStun();
+            }
         }
+    }
+    private void ActiveStun()
+    {
+        // 스턴에 걸리면, 움직이지 못하도록 설정한다.
+        observer.IsAtkBlockTrue();
+        ActiveMoveBlock();
+    }
+
+    private void CancleStun()
+    {
+        observer.IsAtkBlockFalse();
+    }
+
+    private void ActiveMoveBlock()
+    {
+        // 1. 코루틴 사용하기
+        //StartCoroutine("MoveBlock");
+
+        // 2. timer 사용하기
+        navMeshAgent.SetDestination(this.transform.position);
+        isMoveBlock = true;
+        curTime = 0;
+    }
+
+    private void CancleMoveBlock()
+    {
+        curTime = moveBlockTime;
+ 
     }
 
 
     IEnumerator MoveBlock()
     {
-        ColliderActive();
-        navMeshAgent.SetDestination(this.transform.position); // 다음 목적지를 내 위치로 설정해서, 움직임을 제한 
-        isMoveBlock = true; // bool을 이용해 움직임을 제한
+        // 다음 목적지를 내 위치로 설정하고, bool을 이용해 움직임 제한
+        navMeshAgent.SetDestination(this.transform.position);
+        isMoveBlock = true;
 
-        yield return new WaitForSeconds(objBlockTime);
+        yield return new WaitForSeconds(moveBlockTime);
 
         isMoveBlock = false;
-        ColliderActive();
-        navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
     }
 
-
-    private void ColliderActive()
+    private void UpdateTimer()
     {
-        for (int i = 0; i < m_colliders.Length; i++)
+        if (curTime >= 0)
         {
-            m_colliders[i].enabled = !m_colliders[i].enabled;
+            if (curTime >= moveBlockTime)
+            {
+                isMoveBlock = false;
+                curTime = -1;
+                CancleStun();
+            }
+            else
+            {
+                curTime += Time.deltaTime;
+            }
         }
     }
+
     private void OnDrawGizmos()
     {
         //// remainingDistance를 시각적으로 표현되도록 만들어보기
